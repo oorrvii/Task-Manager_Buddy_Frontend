@@ -80,6 +80,16 @@ const Signup = () => {
 
 
         <button type="submit">Signup</button>
+        <p style={{ marginTop: "15px", textAlign: "center" }}>
+  Already have an account?{" "}
+  <span
+    style={{ color: "#2563eb", cursor: "pointer", fontWeight: "500" }}
+    onClick={() => navigate("/login")}
+  >
+    Login
+  </span>
+</p>
+
       </form>
     </div>
   );
