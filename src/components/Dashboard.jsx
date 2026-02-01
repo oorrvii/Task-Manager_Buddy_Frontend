@@ -77,7 +77,7 @@ const addTask = async () => {
 
   const deleteTask = async (id) => {
   try {
-    const res = await fetch(`${BASE_URL}/tasks/${id}`, {
+    const res = await fetch(`${BASE_URL}/tasks/${tasks._id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
