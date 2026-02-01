@@ -21,31 +21,46 @@ const Dashboard = () => {
     fetchTasks();
   }, []);
 
- const fetchTasks = async () => {
-  try {
+  const fetchTasks = async () => {
+    try {
+      const res = await fetch(`${BASE_URL}/tasks`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      const data = await res.json();
+
+      // add completed flag (frontend-only)
+      const enhanced = data.map((t) => ({
+        ...t,
+        completed: false,
+      }));
+
+      setTasks(enhanced);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const addTask = async () => {
+    if (!title.trim()) return;
+
     const res = await fetch(`${BASE_URL}/tasks`, {
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
+      body: JSON.stringify({ title, description }),
     });
 
     const data = await res.json();
 
-    if (!res.ok) {
-      console.error("Fetch tasks failed:", data);
-      return;
-    }
-
-    const enhanced = Array.isArray(data)
-      ? data.map((t) => ({ ...t, completed: false }))
-      : [];
-
-    setTasks(enhanced);
-  } catch (err) {
-    console.error("Fetch tasks error:", err);
-  }
-};
-
+    setTasks([...tasks, { ...data, completed: false }]);
+    setTitle("");
+    setDescription("");
+  };
 
   const deleteTask = async (id) => {
     await fetch(`${BASE_URL}/tasks/${id}`, {
