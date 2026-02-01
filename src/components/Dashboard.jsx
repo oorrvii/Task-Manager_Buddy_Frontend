@@ -76,15 +76,26 @@ const addTask = async () => {
 
 
   const deleteTask = async (id) => {
-    await fetch(`${BASE_URL}/tasks/${id}`, {
+  try {
+    const res = await fetch(`${BASE_URL}/tasks/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
-    setTasks(tasks.filter((task) => task._id !== id));
-  };
+    if (!res.ok) {
+      throw new Error("Delete failed");
+    }
+
+    // update UI ONLY if backend succeeded
+    setTasks((prev) => prev.filter((task) => task._id !== id));
+  } catch (err) {
+    console.error("Delete task error:", err);
+    alert("Failed to delete task");
+  }
+};
+
 
   const toggleComplete = (id) => {
     setTasks((prev) =>
