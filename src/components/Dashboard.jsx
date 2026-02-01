@@ -46,56 +46,17 @@ const Dashboard = () => {
   }
 };
 
-const addTask = async () => {
-  if (!title.trim()) return;
-
-  try {
-    const res = await fetch(`${BASE_URL}/tasks`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({ title, description }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      console.error("Add task failed:", data);
-      return;
-    }
-
-    setTasks([...tasks, { ...data, completed: false }]);
-    setTitle("");
-    setDescription("");
-  } catch (err) {
-    console.error("Add task error:", err);
-  }
-};
-
 
   const deleteTask = async (id) => {
-  try {
-    const res = await fetch(`${BASE_URL}/tasks/${tasks._id}`, {
+    await fetch(`${BASE_URL}/tasks/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
-    if (!res.ok) {
-      throw new Error("Delete failed");
-    }
-
-    // update UI ONLY if backend succeeded
-    setTasks((prev) => prev.filter((task) => task._id !== id));
-  } catch (err) {
-    console.error("Delete task error:", err);
-    alert("Failed to delete task");
-  }
-};
-
+    setTasks(tasks.filter((task) => task._id !== id));
+  };
 
   const toggleComplete = (id) => {
     setTasks((prev) =>
