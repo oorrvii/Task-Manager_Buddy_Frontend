@@ -1,0 +1,216 @@
+/* 🔹 RESET & BASE */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+/* 🔹 DASHBOARD WRAPPER */
+.dashboard {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f8fafc;
+  color: #0f172a;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* 🔹 HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* 🔹 BUTTON SYSTEM */
+.btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 28px rgba(79, 70, 229, 0.45);
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid #cbd5f5;
+  color: #334155;
+}
+
+.btn-ghost:hover {
+  background: #e0e7ff;
+}
+
+/* 🔹 CARD */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  max-width: 520px;
+  margin-bottom: 40px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+/* 🔹 INPUTS */
+input,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  margin-bottom: 14px;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #6366f1;
+}
+
+/* 🔹 TASKS */
+.tasks-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.task-card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+}
+
+.task-left {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.task-left h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.task-left p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* 🌙 DARK MODE */
+.dashboard.dark {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+.dashboard.dark .card,
+.dashboard.dark .task-card {
+  background: #0f172a;
+  box-shadow: none;
+}
+
+.dashboard.dark input,
+.dashboard.dark textarea {
+  background: #020617;
+  color: white;
+  border: 1px solid #334155;
+}
+
+.dashboard.dark .btn-ghost {
+  border-color: #475569;
+  color: #e5e7eb;
+}
+
+.dashboard.dark .btn-ghost:hover {
+  background: #1e293b;
+}
+
+.dashboard.dark .task-left p {
+  color: #94a3b8;
+}
+/* 🧩 EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  border-radius: 16px;
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.empty-state h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.empty-state p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.dashboard.dark .empty-state {
+  background: rgba(99, 102, 241, 0.12);
+}
+/* ✅ COMPLETED TASK */
+.task-card.completed {
+  opacity: 0.6;
+}
+
+.task-card.completed h4 {
+  text-decoration: line-through;
+}
+
+.task-card.completed p {
+  text-decoration: line-through;
+}
+
